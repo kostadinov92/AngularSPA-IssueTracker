@@ -12,7 +12,7 @@ angular.module('issueTracker.authentication', [])
         var AUTHENTICATION_COOKIE_KEY = '-__-Auth-__-';
 
         function loginUser(user) {
-            var loginUserData = "grant_type=password&username=" + user.email + "&password=" + user.password;
+            var loginUserData = 'grant_type=password&username=' + user.email + '&password=' + user.password;
 
             var deffered = $q.defer();
 
@@ -39,7 +39,32 @@ angular.module('issueTracker.authentication', [])
         }
 
         function registerUser(user) {
+            var loginUserData = 'Email=' + user.email + '&Password=' + user.password + '&ConfirmPassword=' + user.confirmPassword;
+
+            var deffered = $q.defer();
+
+            var request = {
+                method: 'POST',
+                url: BASE_URL + 'api/Account/Register',
+                data: {
+                    'Email': user.email,
+                    'Password' : user.password,
+                    'ConfirmPassword': user.confirmPassword
+                },
+                headers: {
+                    ContentType: 'application/x-www-form-urlencoded'
+                }
+            };
             
+            //$http.post(BASE_URL + 'api/Account/Register', loginUserData)
+            $http(request)
+                .then(function (success) {
+                deffered.resolve(success);
+            }, function (error) {
+                deffered.reject(error);
+                console.log(error);
+            });
+            return deffered.promise;
         }    
             
         function logoutUser() {
