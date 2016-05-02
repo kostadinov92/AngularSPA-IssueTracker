@@ -11,9 +11,30 @@ angular.module('issueTracker', [
     'issueTracker.issues'
 ])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
+    .constant('toastr', toastr)
     .config([
         '$routeProvider',
-      function($routeProvider) {
+        '$httpProvider',
+      function($routeProvider, $httpProvider) {
+
+          $httpProvider.interceptors.push([
+              '$q',
+              'toastr',
+              function($q, toastr) {
+
+              return {
+                  'responseError': function(rejection) {
+                      if (rejection.data && rejection.data['Message']) {
+                          toastr.error(rejection.data['Message']);
+                      }else if (rejection.data && rejection.data['error_description']){
+                          toastr.error(rejection.data['error_description']);
+                      }
+
+                      return $q.reject(rejection);
+                  }
+              }
+          }]);
+
           $routeProvider.when('/', {
               templateUrl: 'app/home/home.html',
               controller: 'HomeCtrl'
