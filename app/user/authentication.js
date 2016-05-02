@@ -1,7 +1,13 @@
 'use strict';
 
 angular.module('issueTracker.authentication', [])
-    .factory('Authentication', ['$http', '$cookies', '$q', 'BASE_URL', function ($http, $cookies, $q, BASE_URL) {
+    .factory('Authentication', [
+        '$http',
+        '$cookies',
+        '$q',
+        'Identity',
+        'BASE_URL',
+        function ($http, $cookies, $q, identity, BASE_URL) {
 
         var AUTHENTICATION_COOKIE_KEY = '-__-Auth-__-';
 
@@ -15,14 +21,27 @@ angular.module('issueTracker.authentication', [])
             }).then(function (success) {
                 $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
                 $cookies.put(AUTHENTICATION_COOKIE_KEY, $http.defaults.headers.common.Authorization);
+                
+                identity.requestUserInfo()
+                    .then(function (success) {
+                        deffered.resolve(success);
+                    }, function (error) {
+                        deffered.reject(error);
+                    });
                 console.log(success);
                 console.log(!!$cookies.get(AUTHENTICATION_COOKIE_KEY));
 
             }, function (error) {
+                deffered.reject(error);
                 console.log(error);
             });
+            return deffered.promise;
         }
 
+        function registerUser(user) {
+            
+        }    
+            
         function logoutUser() {
             $http.defaults.headers.common.Authorization = undefined;
             $cookies.remove(AUTHENTICATION_COOKIE_KEY);
@@ -40,6 +59,7 @@ angular.module('issueTracker.authentication', [])
         }
 
         return {
+            registerUser: registerUser,
             loginUser: loginUser,
             logoutUser: logoutUser,
             refreshCookie: refreshCookie,

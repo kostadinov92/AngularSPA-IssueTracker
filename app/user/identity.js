@@ -1,3 +1,28 @@
-/**
- * Created by hitma on 2.5.2016 г..
- */
+'use strict';
+
+angular.module('issueTracker.identity', [])
+    .factory('Identity', [
+        '$http',
+        '$q',
+        'BASE_URL',
+        function ($http, $q, BASE_URL) {
+        var user = undefined;
+
+        function requestUserInfo() {
+            var deffered = $q.defer();
+            var url = BASE_URL + 'Users/me';
+            $http.get(url)
+                .then(function (success) {
+                    user = success.data;
+                    console.log(user);
+                    deffered.resolve(success);
+                }, function (error) {
+                    deffered.reject(error);
+                });
+            return deffered.promise;
+        }
+
+        return{
+            requestUserInfo: requestUserInfo
+        };
+}]);
