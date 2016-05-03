@@ -5,10 +5,12 @@ angular.module('issueTracker', [
     'ngCookies',
     'issueTracker.authentication',
     'issueTracker.identity',
+    'issueTracker.admin.navbar',
     'issueTracker.navbarCtrl',
     'issueTracker.home',
     'issueTracker.dashboardCtrl',
-    'issueTracker.issues'
+    'issueTracker.issues',
+    //'issueTracker.paginator'
 ])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
     .constant('toastr', toastr)
@@ -24,13 +26,19 @@ angular.module('issueTracker', [
 
               return {
                   'responseError': function(rejection) {
-                      if (rejection.data && rejection.data['error_description']){
-                          toastr.error(rejection.data['error_description']);
-                      }else if(rejection.data['ModelState'] && rejection.data['ModelState']['']) {
-                          for(var i = 0; i < rejection.data['ModelState'][''].length; i+=1){
+                      if(rejection.data['ModelState'] && rejection.data['ModelState']){
+                          if(rejection.data['ModelState']['']){
+                              for(var i = 0; i < rejection.data['ModelState'][''].length; i+=1){
                               toastr.error(rejection.data['ModelState'][''][i]);
+                              }
+                          }if(rejection.data['ModelState']['model.ConfirmPassword']){
+                              for(var i = 0; i < rejection.data['ModelState']['model.ConfirmPassword'].length; i+=1){
+                              toastr.error(rejection.data['ModelState']['model.ConfirmPassword'][i]);
+                              }
                           }
-                      }else if (rejection.data && rejection.data['Message']) {
+                      }if (rejection.data && rejection.data['error_description']){
+                          toastr.error(rejection.data['error_description']);
+                      }if (rejection.data && rejection.data['Message']) {
                           toastr.error(rejection.data['Message']);
                       }
 
