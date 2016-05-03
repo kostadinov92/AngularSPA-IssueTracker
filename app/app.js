@@ -5,6 +5,8 @@ angular.module('issueTracker', [
     'ngCookies',
     'issueTracker.authentication',
     'issueTracker.identity',
+    'issueTracker.account',
+    'issueTracker.profile.changePassword',
     'issueTracker.navbarCtrl',
     'issueTracker.home',
     'issueTracker.dashboardCtrl',
@@ -47,6 +49,11 @@ angular.module('issueTracker', [
           $routeProvider.when('/dashboard', {
               templateUrl: 'app/dashboard/dashboard.html',
               controller: 'DashboardCtrl'
+          });
+
+          $routeProvider.when('/profile/password', {
+              templateUrl: 'app/profile/change-password.html',
+              controller: 'ChangePasswordCtrl'
           });
 
           $routeProvider.otherwise({redirectTo: '/'});
