@@ -5,15 +5,14 @@ angular.module('issueTracker', [
     'ngCookies',
     'issueTracker.authentication',
     'issueTracker.identity',
-<<<<<<< HEAD
     'issueTracker.account',
     'issueTracker.profile.changePassword',
-=======
     'issueTracker.admin.navbar',
->>>>>>> 47281602cea9aa95b1a4647239132cc482153016
     'issueTracker.navbarCtrl',
     'issueTracker.home',
     'issueTracker.dashboardCtrl',
+    'issueTracker.projects',
+    'issueTracker.projectsController',
     'issueTracker.issues',
     //'issueTracker.paginator'
 ])
@@ -65,6 +64,11 @@ angular.module('issueTracker', [
           $routeProvider.when('/profile/password', {
               templateUrl: 'app/profile/change-password.html',
               controller: 'ChangePasswordCtrl'
+          });
+
+          $routeProvider.when('/projects', {
+              templateUrl: 'app/projects/projects.html',
+              controller: 'ProjectsCtrl'
           });
 
           $routeProvider.otherwise({redirectTo: '/'});
