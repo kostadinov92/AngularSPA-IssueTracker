@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-10 col-lg-offset-1">
             <ul class="pager">
                 <li class="previous disabled"><a href="#">&larr; Older</a></li>
                 <li class="next"><a href="#">Newer &rarr;</a></li>
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-10 col-lg-offset-1">
             <div class="btn-group-sm">
                 <a href="" class="btn btn-primary">10</a>
                 <a href="" class="btn btn-primary">25</a>
@@ -27,7 +27,7 @@
                 <tbody>
                 <tr ng-repeat="project in projects">
                     <td>{{$index + 1}}</td>
-                    <td>{{project.Name}}</td>
+                    <td><a href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
                     <td>{{project.ProjectKey}}</td>
                     <td>{{project.Lead.Username}}</td>
                     <td>

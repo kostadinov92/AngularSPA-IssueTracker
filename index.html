@@ -25,11 +25,11 @@
         </div>
         <div id="navbar-main" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+              <li>
+                  <a href="#/dashboard">Dashboard</a>
+              </li>
             <li>
               <a href="#/projects">Projects</a>
-            </li>
-            <li>
-              <a href="http://news.bootswatch.com">Blog</a>
             </li>
           </ul>
 
@@ -58,19 +58,7 @@
     <div ng-view class='container'>
     </div>
 
-    <div class="container">
-      <footer>
-        <div class="row">
-          <div class="col-lg-10">
-            <ul class="list-unstyled">
-              <li class="pull-right"><a href="#top">Back to top</a></li>
-              <li><a href="https://github.com/kostadinov92/AngularSPA-IssueTracker">GitHub</a></li>
-              <li><a href="http://softuni-issue-tracker.azurewebsites.net/Help">API</a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
+    <div footer />
 
     </div>
     <script src="app/bower_components/jquery/dist/jquery.js"></script>
@@ -88,8 +76,11 @@
     <script src="app/home/home.js"></script>
     <script src="app/dashboard/dashboard-controller.js"></script>
     <script src="app/projects/projects.js"></script>
-    <script src="app/projects/projects-controller.js"></script>
+    <script src="app/projects/all/projects-controller.js"></script>
+    <script src="app/projects/project/project-controller.js"></script>
     <script src="app/issues/issues.js"></script>
+    <script src="app/components/common/footer/footer-directive.js"></script>
+    <script src="app/components/common/footer/footer-controller.js"></script>
     <script src="app/app.js"></script>
 
 </body>

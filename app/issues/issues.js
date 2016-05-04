@@ -9,6 +9,21 @@ angular.module('issueTracker.issues', [])
 
             var requestUrl = BASE_URL + 'issues/';
 
+            function getIssuesByProjectId(id) {
+                var defered = $q.defer();
+
+                var url = BASE_URL + 'projects/' + id + '/issues';
+                $http.get(url)
+                    .then(function (success) {
+                        defered.resolve(success.data);
+                    }, function (error) {
+                        defered.reject(error);
+                        console.log(error);
+                    });
+
+                return defered.promise;
+            }
+
             function getCurrentUserIssues(pageSize, pageNumber) {
                 var url = requestUrl + 'me?orderBy=DueDate&pageSize=' + pageSize + '&pageNumber=' + pageNumber;
                 var deffered = $q.defer();
@@ -24,7 +39,8 @@ angular.module('issueTracker.issues', [])
             }
 
             return{
-                getCurrentUserIssues: getCurrentUserIssues
+                getCurrentUserIssues: getCurrentUserIssues,
+                getIssuesByProjectId: getIssuesByProjectId
             };
         }
     ]);

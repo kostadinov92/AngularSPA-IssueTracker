@@ -13,7 +13,10 @@ angular.module('issueTracker', [
     'issueTracker.dashboardCtrl',
     'issueTracker.projects',
     'issueTracker.projectsController',
+    'issueTracker.projects.projectController',
     'issueTracker.issues',
+    'issueTracker.footer.footerDirective',
+    'issueTracker.footer.footerController'
     //'issueTracker.paginator'
 ])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
@@ -67,8 +70,13 @@ angular.module('issueTracker', [
           });
 
           $routeProvider.when('/projects', {
-              templateUrl: 'app/projects/projects.html',
+              templateUrl: 'app/projects/all/projects.html',
               controller: 'ProjectsCtrl'
+          });
+
+          $routeProvider.when('/projects/:projectId', {
+              templateUrl: 'app/projects/project/project.html',
+              controller: 'ProjectCtrl'
           });
 
           $routeProvider.otherwise({redirectTo: '/'});

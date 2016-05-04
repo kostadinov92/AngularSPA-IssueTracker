@@ -10,7 +10,7 @@ angular.module('issueTracker.projectsController', [])
             $scope.totalPages = function () {
                 return [];
             };
-            projects.getAllProjects(50, 1)
+            projects.getAllProjects(25, 3)
                 .then(function (success) {
                     $scope.projects = success.Projects;
                     $scope.totalProjects = success.TotalCount;
