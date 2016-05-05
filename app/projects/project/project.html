@@ -4,7 +4,7 @@
             <p class="text-primary text-center">{{project.Name}}</p>
         </h2>
         <div class="btn-group btn-group-justified">
-            <a ng-if="project.Lead.Id === user.get().Id" href="#/projects/{{project.Id}}/edit" class="btn btn-default">Edit</a>
+            <a ng-if="project.Lead.Id === user().Id || user().isAdmin" href="#/projects/{{project.Id}}/edit" class="btn btn-default">Edit</a>
         </div>
         <hr/>
         <p>
@@ -33,7 +33,7 @@
                 <h3 class="panel-title">Priorities</h3>
             </div>
             <div class="panel-body">
-                <span ng-repeat="priority in project.Priorities" class="label label-warning">{{priority.Name}}</span>
+                <span ng-repeat="priority in project.priorities" class="label label-warning">{{priority.Name}}</span>
             </div>
         </div>
     </div>

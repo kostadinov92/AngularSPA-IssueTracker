@@ -6,6 +6,7 @@ angular.module('issueTracker', [
     'issueTracker.authentication',
     'issueTracker.identity',
     'issueTracker.account',
+    'issueTracker.users',
     'issueTracker.profile.changePassword',
     'issueTracker.admin.navbar',
     'issueTracker.navbarCtrl',
@@ -22,6 +23,7 @@ angular.module('issueTracker', [
 ])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
     .constant('toastr', toastr)
+    .constant('jQuery', $)
     .config([
         '$routeProvider',
         '$httpProvider',
@@ -88,7 +90,8 @@ angular.module('issueTracker', [
 
           $routeProvider.otherwise({redirectTo: '/'});
 }])
-    .run(['Authentication', function(authentication) {
-        
+    .run([
+        'Authentication',
+        function(authentication) {
         authentication.refreshCookie();
     }]);

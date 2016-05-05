@@ -16,7 +16,10 @@ angular.module('issueTracker.identity', [])
                     return user.isAdmin;
                 }
                 
-                
+
+            function resetUserData() {
+                user = {};
+            }
                 
             function requestUserInfo() {
                 var deffered = $q.defer();
@@ -39,6 +42,7 @@ angular.module('issueTracker.identity', [])
         return{
             getUser: getUser,
             requestUserInfo: requestUserInfo,
-            isAdmin: isAdmin
+            isAdmin: isAdmin,
+            resetUserData: resetUserData
         };
 }]);

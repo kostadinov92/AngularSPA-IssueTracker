@@ -70,6 +70,7 @@ angular.module('issueTracker.authentication', [])
         function logoutUser() {
             $http.defaults.headers.common.Authorization = undefined;
             $cookies.remove(AUTHENTICATION_COOKIE_KEY);
+            identity.resetUserData();
         }
 
         function isAuthenticated() {

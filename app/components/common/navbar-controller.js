@@ -11,4 +11,6 @@ angular.module('issueTracker.navbarCtrl', [])
                 authentication.logoutUser();
                 $location.path('/');
             };
+            
+        $scope.getUser = identity.getUser;
     }]);

@@ -1,88 +1,90 @@
 <html lang="en" ng-app="issueTracker" class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SoftUni Issue Tracker</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="app/bootstrap.min.css">
-  <link rel="stylesheet" href="app/bower_components/toastr/toastr.css">
-  <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app/app.css">
-  <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SoftUni Issue Tracker</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app/bootstrap.min.css">
+    <link rel="stylesheet" href="app/bower_components/toastr/toastr.css">
+    <link rel="stylesheet" href="app/app.css">
+    <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-    <div ng-controller="navbarCtrl" class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+<div ng-controller="navbarCtrl" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#/">SoftUni Issue Tracker</a>
-          <button data-target="#navbar-main" data-toggle="collapse" type="button" class="navbar-toggle">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+            <a class="navbar-brand" href="#/">SoftUni Issue Tracker</a>
+            <button data-target="#navbar-main" data-toggle="collapse" type="button" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
         <div id="navbar-main" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-              <li>
-                  <a href="#/dashboard">Dashboard</a>
-              </li>
-            <li>
-              <a href="#/projects">Projects</a>
-            </li>
-          </ul>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#/dashboard">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#/projects">Projects</a>
+                </li>
+            </ul>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a id="download" href="" data-toggle="dropdown" class="dropdown-toggle">Profile <span class="caret"></span></a>
-              <ul aria-labelledby="download" class="dropdown-menu">
-                <li><a href="http://jsfiddle.net/bootswatch/Laobkr1d/">Open Sandbox</a></li>
-                <li class="divider"></li>
-                <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
-                <li><a href="./bootstrap.css">bootstrap.css</a></li>
-                <li class="divider"></li>
-                <li><a href="./variables.less">variables.less</a></li>
-                <li><a href="./bootswatch.less">bootswatch.less</a></li>
-                <li class="divider"></li>
-                <li><a href="#/profile/password">Change Password</a></li>
-                <li><a ng-click="logoutUser()" href="">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
+            <ul ng-if="getUser().Username" class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="download" href="" data-toggle="dropdown" class="dropdown-toggle">{{getUser().Username}} <span
+                            class="caret"></span></a>
+                    <ul aria-labelledby="download" class="dropdown-menu">
+                        <li><a href="http://jsfiddle.net/bootswatch/Laobkr1d/">Open Sandbox</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
+                        <li><a href="./bootstrap.css">bootstrap.css</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./variables.less">variables.less</a></li>
+                        <li><a href="./bootswatch.less">bootswatch.less</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#/profile/password">Change Password</a></li>
+                        <li><a ng-click="logoutUser()" href="">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-      </div>
-
     </div>
 
-    <div ng-view class='container'>
-    </div>
+</div>
 
-    <div footer />
+<div ng-view class='container'>
+</div>
 
-    </div>
-    <script src="app/bower_components/jquery/dist/jquery.js"></script>
-    <script src="app/bower_components/toastr/toastr.js"></script>
-    <script src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="app/bower_components/angular/angular.js"></script>
-    <script src="app/bower_components/angular-route/angular-route.js"></script>
-    <script src="app/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="app/components/common/navbar-controller.js"></script>
-    <script src="app/user/authentication.js"></script>
-    <script src="app/user/identity.js"></script>
-    <script src="app/user/account.js"></script>
-    <script src="app/profile/change-password-controller.js"></script>
-    <script src="app/admin/navbar/admin-navbar.js"></script>
-    <script src="app/home/home.js"></script>
-    <script src="app/dashboard/dashboard-controller.js"></script>
-    <script src="app/projects/projects.js"></script>
-    <script src="app/projects/all/projects-controller.js"></script>
-    <script src="app/projects/project/project-controller.js"></script>
-    <script src="app/issues/issues.js"></script>
-    <script src="app/components/common/back-directive.js"></script>
-    <script src="app/components/common/footer/footer-directive.js"></script>
-    <script src="app/components/common/footer/footer-controller.js"></script>
-    <script src="app/app.js"></script>
+<div footer/>
+
+</div>
+<script src="app/bower_components/jquery/dist/jquery.js"></script>
+<script src="app/bower_components/toastr/toastr.js"></script>
+<script src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="app/bower_components/angular/angular.js"></script>
+<script src="app/bower_components/angular-route/angular-route.js"></script>
+<script src="app/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="app/components/common/navbar-controller.js"></script>
+<script src="app/user/authentication.js"></script>
+<script src="app/user/identity.js"></script>
+<script src="app/user/account.js"></script>
+<script src="app/user/users.js"></script>
+<script src="app/profile/change-password-controller.js"></script>
+<script src="app/admin/navbar/admin-navbar.js"></script>
+<script src="app/home/home.js"></script>
+<script src="app/dashboard/dashboard-controller.js"></script>
+<script src="app/projects/projects.js"></script>
+<script src="app/projects/all/projects-controller.js"></script>
+<script src="app/projects/project/project-controller.js"></script>
+<script src="app/issues/issues.js"></script>
+<script src="app/components/common/back-directive.js"></script>
+<script src="app/components/common/footer/footer-directive.js"></script>
+<script src="app/components/common/footer/footer-controller.js"></script>
+<script src="app/app.js"></script>
 
 </body>
 </html>
