@@ -3,6 +3,7 @@
 angular.module('issueTracker', [
     'ngRoute',
     'ngCookies',
+    'ngSanitize',
     'angular-loading-bar',
     'issueTracker.components.common.footer.footerDirective',
     'issueTracker.components.common.paginator.paginatorDirective',
