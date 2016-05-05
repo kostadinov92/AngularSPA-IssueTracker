@@ -15,6 +15,7 @@ angular.module('issueTracker', [
     'issueTracker.projectsController',
     'issueTracker.projects.projectController',
     'issueTracker.issues',
+    'issueTracker.common.backDirective',
     'issueTracker.footer.footerDirective',
     'issueTracker.footer.footerController'
     //'issueTracker.paginator'
@@ -73,9 +74,15 @@ angular.module('issueTracker', [
               templateUrl: 'app/projects/all/projects.html',
               controller: 'ProjectsCtrl'
           });
+          
 
           $routeProvider.when('/projects/:projectId', {
               templateUrl: 'app/projects/project/project.html',
+              controller: 'ProjectCtrl'
+          });
+
+          $routeProvider.when('/projects/:projectId/edit', {
+              templateUrl: 'app/projects/project/edit-project.html',
               controller: 'ProjectCtrl'
           });
 

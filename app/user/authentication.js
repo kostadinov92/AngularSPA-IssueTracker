@@ -80,6 +80,8 @@ angular.module('issueTracker.authentication', [])
         function refreshCookie() {
             if (isAuthenticated()) {
                 $http.defaults.headers.common.Authorization = $cookies.get(AUTHENTICATION_COOKIE_KEY);
+                identity.requestUserInfo();
+                    
             }
         }
 

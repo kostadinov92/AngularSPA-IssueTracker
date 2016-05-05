@@ -5,7 +5,8 @@ angular.module('issueTracker.navbarCtrl', [])
         '$scope',
         '$location',
         'Authentication',
-        function ($scope, $location, authentication) {
+        'Identity',
+        function ($scope, $location, authentication, identity) {
             $scope.logoutUser = function logoutUser() {
                 authentication.logoutUser();
                 $location.path('/');

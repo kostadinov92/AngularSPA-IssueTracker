@@ -6,7 +6,7 @@ angular.module('issueTracker.dashboardCtrl', [])
         'Identity',
         'Issues',
         function ($scope, identity, issues) {
-            issues.getCurrentUserIssues(5, 1)
+            issues.getCurrentUserIssues(20, 1)
                 .then(function (data) {
                     $scope.totalPages = data.TotalPages;
                     $scope.totalCount = data.TotalCount;

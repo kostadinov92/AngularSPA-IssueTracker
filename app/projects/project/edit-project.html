@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-lg-6">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>Edit Project</legend>
+                <div>
+                    <button back-directive type="button" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="projectName" class="col-lg-2 control-label text-primary">Project</label>
+                    <div class="col-lg-10">
+                        <input ng-model="project.Name" class="form-control" id="projectName" type="text">
+                    </div>
+                </div>
+                <hr/>
+                <p>
+                    <span class="text-primary"><strong>Key: </strong></span>
+                    <span class="pull-right test-actual">{{project.ProjectKey}}</span>
+                </p>
+                <p>
+                    <span class="text-primary"><strong>Leader: </strong></span>
+                    <span class="pull-right text-info">{{project.Lead.Username}}</span>
+                </p>
+                <div class="form-group">
+                    <label for="projectDescription" class="col-lg-2 control-label text-primary">Description</label>
+                    <div class="col-lg-10">
+                        <textarea ng-model="project.Description" class="form-control" rows="3" id="projectDescription"></textarea>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Labels</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span ng-repeat="label in project.Labels" class="label label-primary">{{label.Name}}</span>
+                    </div>
+                </div>
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Priorities</h3>
+                    </div>
+                    <div class="panel-body">
+                        <span ng-repeat="priority in project.Priorities" class="label label-warning">{{priority.Name}}</span>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
