@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="app/app.css">
     <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
+<body ng-controller="HomeCtrl">
 <div ng-controller="navbarCtrl" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -23,17 +23,14 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div id="navbar-main" class="navbar-collapse collapse">
+        <div ng-if="isAuthenticated()" id="navbar-main" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="#/dashboard">Dashboard</a>
-                </li>
                 <li>
                     <a href="#/projects">Projects</a>
                 </li>
             </ul>
 
-            <ul ng-if="getUser().Username" class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a id="download" href="" data-toggle="dropdown" class="dropdown-toggle">{{getUser().Username}} <span
                             class="caret"></span></a>
@@ -69,21 +66,22 @@
 <script src="app/bower_components/angular-route/angular-route.js"></script>
 <script src="app/bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="app/components/common/navbar-controller.js"></script>
-<script src="app/user/authentication.js"></script>
-<script src="app/user/identity.js"></script>
-<script src="app/user/account.js"></script>
-<script src="app/user/users.js"></script>
-<script src="app/profile/change-password-controller.js"></script>
+<script src="app/users/authentication.js"></script>
+<script src="app/users/identity.js"></script>
+<script src="app/users/account.js"></script>
+<script src="app/users/users.js"></script>
+<script src="app/users/profile/change-password-controller.js"></script>
 <script src="app/admin/navbar/admin-navbar.js"></script>
-<script src="app/home/home.js"></script>
-<script src="app/dashboard/dashboard-controller.js"></script>
+<script src="app/home/home-controller.js"></script>
+<script src="app/home/dashboard-controller.js"></script>
+<script src="app/home/registration-controller.js"></script>
 <script src="app/projects/projects.js"></script>
 <script src="app/projects/all/projects-controller.js"></script>
 <script src="app/projects/project/project-controller.js"></script>
 <script src="app/issues/issues.js"></script>
 <script src="app/components/common/back-directive.js"></script>
 <script src="app/components/common/footer/footer-directive.js"></script>
-<script src="app/components/common/footer/footer-controller.js"></script>
+<script src="app/components/common/paginator/paginator-directive.js"></script>
 <script src="app/app.js"></script>
 
 </body>

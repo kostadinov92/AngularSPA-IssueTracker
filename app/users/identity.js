@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.identity', [])
+angular.module('issueTracker.users.identity', [])
     .factory('Identity', [
         '$http',
         '$q',

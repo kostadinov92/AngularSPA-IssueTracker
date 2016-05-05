@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('issueTracker.footer.footerDirective', [])
+angular.module('issueTracker.components.common.footer.footerDirective', [])
     .directive('footer', [
-        function () {
+        '$location',
+        function ($location) {
             return {
                 templateUrl: 'app/components/common/footer/footer.html',
-                controller: 'FooterCtrl',
                 restrict: 'A',
                 link: function (scope, element) {
-                    console.log(scope.currentPath);
+                    scope.currentPath = $location.path();
                 }
             };
         }

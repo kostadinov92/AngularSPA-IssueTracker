@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.paginator', [])
+angular.module('issueTracker.components.common.paginator.paginatorDirective', [])
 .directive('paginator', [
     function PaginatorDirective(params) {
         return{

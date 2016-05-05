@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.account', [])
+angular.module('issueTracker.users.account', [])
     .factory('Account', [
         '$http',
         '$q',

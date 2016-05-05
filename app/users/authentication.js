@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.authentication', [])
+angular.module('issueTracker.users.authentication', [])
     .factory('Authentication', [
         '$http',
         '$cookies',
@@ -56,7 +56,6 @@ angular.module('issueTracker.authentication', [])
                 }
             };
             
-            //$http.post(BASE_URL + 'api/Account/Register', loginUserData)
             $http(request)
                 .then(function (success) {
                 deffered.resolve(success);
@@ -74,7 +73,6 @@ angular.module('issueTracker.authentication', [])
         }
 
         function isAuthenticated() {
-            console.log(!!$cookies.get(AUTHENTICATION_COOKIE_KEY));
             return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
         }
 

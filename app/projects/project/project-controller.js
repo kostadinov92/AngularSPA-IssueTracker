@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.projects.projectController', [])
+angular.module('issueTracker.projects.project.projectController', [])
     .controller('ProjectCtrl', [
         '$scope',
         '$routeParams',

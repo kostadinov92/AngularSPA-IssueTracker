@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.projectsController', [])
+angular.module('issueTracker.projects.all.projectsController', [])
     .controller('ProjectsCtrl', [
         '$scope',
         '$location',

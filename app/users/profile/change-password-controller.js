@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTracker.profile.changePassword', [])
+angular.module('issueTracker.users.profile.changePasswordCtrl', [])
     .controller('ChangePasswordCtrl', [
         '$scope',
         'Account',
