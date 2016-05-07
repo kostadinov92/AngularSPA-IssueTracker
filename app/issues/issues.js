@@ -24,7 +24,7 @@ angular.module('issueTracker.issues', [])
                 return defered.promise;
             }
 
-            function getCurrentUserIssues(pageSize, pageNumber) {
+            function getUserIssues(pageSize, pageNumber) {
                 var url = requestUrl + 'me?orderBy=DueDate&pageSize=' + pageSize + '&pageNumber=' + pageNumber;
                 var deffered = $q.defer();
 
@@ -39,7 +39,7 @@ angular.module('issueTracker.issues', [])
             }
 
             return{
-                getCurrentUserIssues: getCurrentUserIssues,
+                getUserIssues: getUserIssues,
                 getIssuesByProjectId: getIssuesByProjectId
             };
         }
