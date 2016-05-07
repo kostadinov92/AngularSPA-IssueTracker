@@ -4,7 +4,7 @@
             <p class="text-primary text-center">{{issue.Title}}</p>
         </h2>
         <div class="btn-group btn-group-justified">
-            <a ng-if="issue.Project.Leader.Id === user().Id" href="#/issues/{{issue.Id}}/edit" class="btn btn-default">Edit</a>
+            <a ng-if="issue.Project.Lead.Id === user().Id" href="#/issues/{{issue.Id}}/edit" class="btn btn-default">Edit</a>
         </div>
         <hr/>
         <p>
@@ -51,25 +51,36 @@
             </div>
         </div>
     </div>
-    <div ng-if="issue.comments" class="col-lg-6 col-lg-offset-1">
-        <h3 class="text-primary text-center">Comments</h3>
-        <hr />
-        <hr />
-        <div class="list-group">
-            <blockquote ng-repeat="comment in issue.comments">
-                <p>{{comment.Text}}</p>
-                <small>{{comment.Author.Username}} <p class="pull-right"><small>{{comment.CreatedOn}}</small></p></small>
-            </blockquote>
-        </div>
-    </div>
-    <div ng-if="!issue.comments" class="col-lg-6 col-lg-offset-1">
-        <h3 class="text-primary text-center">Comments</h3>
-        <hr />
-        <hr />
-        <div class="list-group">
-            <blockquote>
-                <p>There are no Comments.</p>
-            </blockquote>
+    <div class="col-lg-6 col-lg-offset-1">
+        <div>
+            <h3 class="text-primary text-center">Comments</h3>
+            <hr />
+            <form ng-if="isUserRelated" class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="inputAddComment" class="col-lg-2 control-label">Add Comment</label>
+                        <div class="col-lg-10">
+                            <textarea ng-model="inputAddComment" class="form-control" rows="2" id="inputAddComment"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default">Clear</button>
+                            <button ng-click="addComment()" type="button" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <hr />
+            <div class="list-group">
+                <blockquote ng-if="!issue.comments">
+                    <p>There are no Comments.</p>
+                </blockquote>
+                <blockquote  ng-if="issue.comments" ng-repeat="comment in issue.comments">
+                    <p>{{comment.Text}}</p>
+                    <small>{{comment.Author.Username}} <p class="pull-right"><small>{{comment.CreatedOn}}</small></p></small>
+                </blockquote>
+            </div>
         </div>
     </div>
 </div>

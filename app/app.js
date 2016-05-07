@@ -95,6 +95,8 @@ angular.module('issueTracker', [
 }])
     .run([
         'Authentication',
-        function(authentication) {
-        authentication.refreshCookie();
+        'Identity',
+        function(authentication, identity) {
+            authentication.refreshCookie();
+            identity.requestUserInfo();
     }]);

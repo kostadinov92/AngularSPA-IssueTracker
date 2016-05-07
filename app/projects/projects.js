@@ -30,7 +30,6 @@ angular.module('issueTracker.projects', [])
                 $http.get(url)
                     .then(function (success) {
                         defered.resolve(success.data);
-                        console.log(success.data);
                     }, function (error) {
                         defered.reject(error);
                         console.log(error);
