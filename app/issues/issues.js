@@ -7,7 +7,20 @@ angular.module('issueTracker.issues', [])
         'BASE_URL',
         function Issues($http, $q, BASE_URL) {
 
-            var requestUrl = BASE_URL + 'issues/';
+            function getIssueById(id) {
+                var defered = $q.defer();
+
+                var url = BASE_URL + 'issues/' + id;
+                $http.get(url)
+                    .then(function (success) {
+                        defered.resolve(success.data);
+                    }, function (error) {
+                        defered.reject(error);
+                        console.log(error);
+                    });
+
+                return defered.promise;
+            }
 
             function getIssuesByProjectId(id) {
                 var defered = $q.defer();
@@ -25,7 +38,7 @@ angular.module('issueTracker.issues', [])
             }
 
             function getUserIssues(pageSize, pageNumber) {
-                var url = requestUrl + 'me?orderBy=DueDate&pageSize=' + pageSize + '&pageNumber=' + pageNumber;
+                var url = BASE_URL + 'issues/me?orderBy=DueDate&pageSize=' + pageSize + '&pageNumber=' + pageNumber;
                 var deffered = $q.defer();
 
                 $http.get(url)
@@ -38,9 +51,26 @@ angular.module('issueTracker.issues', [])
                 return deffered.promise;
             }
 
+            function getCommentsByIssueId(id) {
+                var defered = $q.defer();
+
+                var url = BASE_URL + '/issues/' + id + '/comments';
+                $http.get(url)
+                    .then(function (success) {
+                        defered.resolve(success.data);                        
+                    }, function (error) {
+                        defered.reject(error);
+                        console.log(error);
+                    });
+
+                return defered.promise;
+            }
+
             return{
+                getIssueById: getIssueById,
                 getUserIssues: getUserIssues,
-                getIssuesByProjectId: getIssuesByProjectId
+                getIssuesByProjectId: getIssuesByProjectId,
+                getCommentsByIssueId: getCommentsByIssueId
             };
         }
     ]);

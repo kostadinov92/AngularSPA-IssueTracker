@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-lg-4">
+        <h2>
+            <p class="text-primary text-center">{{issue.Title}}</p>
+        </h2>
+        <div class="btn-group btn-group-justified">
+            <a ng-if="issue.Project.Leader.Id === user().Id" href="#/issues/{{issue.Id}}/edit" class="btn btn-default">Edit</a>
+        </div>
+        <hr/>
+        <p>
+            <span class="text-primary"><strong>Key: </strong></span>
+            <span class="pull-right test-actual">{{issue.IssueKey}}</span>
+        </p>
+        <hr />
+        <p>
+            <span class="text-primary"><strong>Project: </strong></span>
+            <a href="#/projects/{{issue.Project.Id}}"><span class="pull-right test-actual">{{issue.Project.Name}}</span></a>
+        </p>
+        <p>
+            <span class="text-primary"><strong>Author: </strong></span>
+            <span class="pull-right text-info">{{issue.Author.Username}}</span>
+        </p>
+        <p>
+            <span class="text-primary"><strong>Assignee: </strong></span>
+            <span class="pull-right text-info">{{issue.Assignee.Username}}</span>
+        </p>
+        <hr />
+        <p>
+            <span class="text-primary"><strong>Priority: </strong></span>
+            <span class="pull-right text-info">{{issue.Priority.Name}}</span>
+        </p>
+        <p>
+            <span class="text-primary"><strong>Due Date: </strong></span>
+            <span class="pull-right text-info">{{issue.DueDate}}</span>
+        </p>
+        <div class="well">
+            <p class="text-primary">
+                {{issue.Description}}
+            </p>
+        </div>
+        <p>
+            <span class="text-primary"><strong>Status: </strong></span>
+            <span class="pull-right text-info">{{issue.Status.Name}}</span>
+        </p>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Labels</h3>
+            </div>
+            <div class="panel-body">
+                <span ng-repeat="label in issue.Labels" class="label label-primary">{{label.Name}}</span>
+            </div>
+        </div>
+    </div>
+    <div ng-if="issue.comments" class="col-lg-6 col-lg-offset-1">
+        <h3 class="text-primary text-center">Comments</h3>
+        <hr />
+        <hr />
+        <div class="list-group">
+            <blockquote ng-repeat="comment in issue.comments">
+                <p>{{comment.Text}}</p>
+                <small>{{comment.Author.Username}} <p class="pull-right"><small>{{comment.CreatedOn}}</small></p></small>
+            </blockquote>
+        </div>
+    </div>
+    <div ng-if="!issue.comments" class="col-lg-6 col-lg-offset-1">
+        <h3 class="text-primary text-center">Comments</h3>
+        <hr />
+        <hr />
+        <div class="list-group">
+            <blockquote>
+                <p>There are no Comments.</p>
+            </blockquote>
+        </div>
+    </div>
+</div>
+

@@ -28,8 +28,6 @@ angular.module('issueTracker.users.identity', [])
                 $http.get(url)
                     .then(function (success) {
                         user = success.data;
-                        
-                        console.log(user);
                         deffered.resolve(success);
                     }, function (error) {
                         deffered.reject(error);

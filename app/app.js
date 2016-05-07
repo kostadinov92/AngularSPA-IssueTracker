@@ -17,6 +17,7 @@ angular.module('issueTracker', [
     'issueTracker.projects.project.projectController',
     'issueTracker.issues',
     'issueTracker.users',
+    'issueTracker.issues.issue.issueController',
     'issueTracker.users.authentication',
     'issueTracker.users.identity',
     'issueTracker.users.account',
@@ -55,6 +56,11 @@ angular.module('issueTracker', [
           $routeProvider.when('/projects/:projectId/edit', {
               templateUrl: 'app/projects/project/edit-project.html',
               controller: 'ProjectCtrl'
+          });
+
+          $routeProvider.when('/issues/:issueId', {
+              templateUrl: 'app/issues/issue/issue.html',
+              controller: 'IssueCtrl'
           });
 
           $routeProvider.otherwise({redirectTo: '/'});

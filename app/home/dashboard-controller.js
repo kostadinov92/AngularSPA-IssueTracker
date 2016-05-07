@@ -14,7 +14,7 @@ angular.module('issueTracker.home.dashboardCtrl', [])
                     $scope.totalPages = data.TotalPages;
                     $scope.totalCount = data.TotalCount;
                     $scope.issues = data.Issues;
-                });            
+                });
             
             projects.getUserRelatedProjects(20, 1)
                 .then(function (data) {
