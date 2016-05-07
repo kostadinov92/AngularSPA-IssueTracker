@@ -46,6 +46,13 @@
                                                 <input ng-model="projectToPost.ProjectKey" class="form-control" id="inputKey" placeholder="Project Key" type="text">
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="inputSearchLeader" class="col-lg-2 control-label">Search</label>
+                                            <div class="col-lg-10">
+                                                <input ng-keyup="loadUsersByFilter()" ng-model="search.user" class="form-control" id="inputSearchLeader" placeholder="Search for project leader." type="text">
+                                                <button ng-click="loadAllUsers()" type="button" class="btn btn-primary">Load All Users</button>
+                                            </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="projectLeader" class="col-lg-2 control-label">Project Leader</label>

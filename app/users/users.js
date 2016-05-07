@@ -22,8 +22,24 @@ angular.module('issueTracker.users', [])
                 return defered.promise;
             }
 
+            function getUsersByFilter(filter) {
+                var defered = $q.defer();
+
+                var url = BASE_URL + 'users/?filter=Username.Contains("' + filter +'")';
+                $http.get(url)
+                    .then(function (success) {
+                        defered.resolve(success.data);
+                    }, function (error) {
+                        defered.reject(error);
+                        console.log(error);
+                    });
+
+                return defered.promise;
+            }
+
             return {
-                getAllUsers: getAllUsers
+                getAllUsers: getAllUsers,
+                getUsersByFilter: getUsersByFilter
             };
         }
     ]);

@@ -13,6 +13,7 @@ angular.module('issueTracker.projects.all.projectsController', [])
 
             $scope.users = {};
             $scope.projectToPost = {};
+            $scope.search = {};
             $scope.totalPages = function () {
                 return [];
             };
@@ -52,6 +53,18 @@ angular.module('issueTracker.projects.all.projectsController', [])
                     $routeParams.page = 1;
                 }
 
+                $scope.loadUsersByFilter = function () {
+                    console.log($scope.search.user.length);
+                    if($scope.search.user.length < 2){
+                        return;
+                    }
+                    users.getUsersByFilter($scope.search.user)
+                        .then(function (data) {
+                            $scope.users = data;
+                            console.log(data);
+                        });
+                };
+
                 projects.getAllProjects($rootScope.pageSize, $routeParams.page)
                     .then(function (success) {
                         $scope.projects = success.Projects;
@@ -69,12 +82,13 @@ angular.module('issueTracker.projects.all.projectsController', [])
             };
             $scope.loadProjects();
 
-            users.getAllUsers()
-                .then(function (data) {
-                    $scope.users = data;
-                });
-            
-            
+            $scope.loadAllUsers = function () {
+                users.getAllUsers()
+                    .then(function (data) {
+                        $scope.users = data;
+                    });
+            };
+
 
         }
     ]);
