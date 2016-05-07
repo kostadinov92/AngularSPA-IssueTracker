@@ -6,6 +6,7 @@ angular.module('issueTracker.projects', [])
         '$q',
         'BASE_URL',
         function Projects($http, $q, BASE_URL) {
+            
             function getAllProjects(pageSize, pageNumber) {
                 var defered = $q.defer();
 

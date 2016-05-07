@@ -3,20 +3,28 @@
 angular.module('issueTracker.projects.all.projectsController', [])
     .controller('ProjectsCtrl', [
         '$scope',
+        '$rootScope',
+        '$routeParams',
         '$location',
         'Projects',
         'Identity',
         'Users',
-        function ProjectsCtrl($scope, $location,projects, identity, users) {
+        function ProjectsCtrl($scope, $rootScope, $routeParams, $location,projects, identity, users) {
 
             $scope.users = {};
             $scope.projectToPost = {};
-            $scope.isAdmin = identity.isAdmin;
-            $scope.currentPath = $location.path();
-
             $scope.totalPages = function () {
                 return [];
             };
+            $scope.isAdmin = identity.isAdmin;
+            
+            $scope.changePageSize = function (size) {
+                $rootScope.pageSize = size;
+                console.log($rootScope.pageSize);
+                $scope.loadProjects();
+            };
+            
+            $scope.currentPath = $location.path();
 
             $scope.addProject = function () {
 
@@ -35,21 +43,31 @@ angular.module('issueTracker.projects.all.projectsController', [])
 
             };
 
-            projects.getAllProjects(25, 22)
-                .then(function (success) {
-                    $scope.projects = success.Projects;
-                    $scope.totalProjects = success.TotalCount;
+            $scope.loadProjects = function(){
+                if(!$rootScope.pageSize){
+                    $rootScope.pageSize = 25;
+                }
 
-                    $scope.totalPages = function () {
-                        var arr = [];
-                        for(var i = 0; i < success.TotalPages - 1; i+=1){
-                            arr[i] = i;
-                        }
-                        return arr;
-                    };              
-                    console.log($scope.currentPath);
-                    console.log(success);
-                });
+                if(!$routeParams.page){
+                    $routeParams.page = 1;
+                }
+
+                projects.getAllProjects($rootScope.pageSize, $routeParams.page)
+                    .then(function (success) {
+                        $scope.projects = success.Projects;
+                        $scope.totalProjects = success.TotalCount;
+
+                        $scope.totalPages = function () {
+                            var arr = [];
+                            for(var i = 0; i < success.TotalPages - 1; i+=1){
+                                arr[i] = i;
+                            }
+                            return arr;
+                        };
+                        console.log(success);
+                    });
+            };
+            $scope.loadProjects();
 
             users.getAllUsers()
                 .then(function (data) {

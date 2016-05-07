@@ -10,9 +10,9 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="btn-group-sm">
-                <a href="" class="btn btn-primary">10</a>
-                <a href="" class="btn btn-primary">25</a>
-                <a href="" class="btn btn-primary">50</a>
+                <a ng-click="changePageSize(25)" href="" class="btn btn-primary">25</a>
+                <a ng-click="changePageSize(50)" href="" class="btn btn-primary">50</a>
+                <a ng-click="changePageSize(100)" href="" class="btn btn-primary">100</a>
                 <div id="addProject" ng-if="isAdmin()">
                     <!-- Button trigger modal add project-->
                     <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#addProjectModal">Add Project</button>
@@ -129,9 +129,9 @@
             </table>
             <div class="text-center">
                 <ul class="pagination">
-                    <li class="disabled"><a href="">&laquo;</a></li>
+                    <li class="disabled"><a href="#/projects?page=1">&laquo;</a></li>
                     <li class="active"><a href="">1</a></li>
-                    <li ng-repeat="page in totalPages()"><a href="">{{$index + 2}}</a></li>
+                    <li ng-repeat="page in totalPages()"><a href="#/projects?page={{$index + 2}}">{{$index + 2}}</a></li>
                     <li><a href="">&raquo;</a></li>
                 </ul>
             </div>
