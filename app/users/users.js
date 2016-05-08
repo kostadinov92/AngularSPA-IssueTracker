@@ -37,9 +37,25 @@ angular.module('issueTracker.users', [])
                 return defered.promise;
             }
 
+            function makeAdmin(userId) {
+                var defered = $q.defer();
+
+                var url = BASE_URL + 'users/makeadmin';
+                $http.put(url, {UserId: userId})
+                    .then(function (success) {
+                        defered.resolve(success);
+                    }, function (error) {
+                        defered.reject(error);
+                        console.log(error);
+                    });
+
+                return defered.promise;
+            }
+
             return {
                 getAllUsers: getAllUsers,
-                getUsersByFilter: getUsersByFilter
+                getUsersByFilter: getUsersByFilter,
+                makeAdmin: makeAdmin
             };
         }
     ]);

@@ -29,6 +29,9 @@
                 <li>
                     <a href="#/projects?page=1">Projects</a>
                 </li>
+                <li>
+                    <a ng-if="isAdmin()" href="#/users">Users</a>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -66,6 +69,7 @@
 <script src="app/users/identity.js"></script>
 <script src="app/users/account.js"></script>
 <script src="app/users/users.js"></script>
+<script src="app/users/users-view/users-view-controller.js"></script>
 <script src="app/users/profile/change-password-controller.js"></script>
 <script src="app/home/home-controller.js"></script>
 <script src="app/home/dashboard-controller.js"></script>

@@ -5,7 +5,8 @@ angular.module('issueTracker.home.homeCtrl', [])
     .controller('HomeCtrl', [
         '$scope',
         'Authentication',
-        function ($scope, authentication) {            
+        'Identity',
+        function ($scope, authentication, identity) {
 
             $scope.isAuthenticated = function () {
                 return authentication.isAuthenticated();

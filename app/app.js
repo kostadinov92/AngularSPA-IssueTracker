@@ -22,6 +22,7 @@ angular.module('issueTracker', [
     'issueTracker.users.authentication',
     'issueTracker.users.identity',
     'issueTracker.users.account',
+    'issueTracker.users.usersView.usersViewCtrl',
     'issueTracker.users.profile.changePasswordCtrl',
     'issueTracker.labels'
     
@@ -38,6 +39,10 @@ angular.module('issueTracker', [
               templateUrl: 'app/home/home.html'
           });
 
+          $routeProvider.when('/users', {
+              templateUrl: 'app/users/users-view/users-view.html',
+              controller: 'UsersViewCtrl'
+          });
 
           $routeProvider.when('/profile/password', {
               templateUrl: 'app/users/profile/change-password.html',
