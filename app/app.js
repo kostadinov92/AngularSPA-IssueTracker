@@ -100,7 +100,20 @@ angular.module('issueTracker', [
               }]);
 }])
     .run([
+        '$rootScope',
+        '$location',
         'Authentication',
-        function(authentication) {
+        function($rootScope, $location, authentication) {
+
             authentication.refreshCookie();
+
+            $rootScope.$on('$routeChangeStart', function (event, next) {
+
+                if(!!next.$$route && next.$$route.originalPath !== '/') {
+                    if (!authentication.isAuthenticated()) {
+                        console.log('DENY : Redirecting to Login');
+                        $location.path('#/');
+                    }
+                }
+            });
     }]);
