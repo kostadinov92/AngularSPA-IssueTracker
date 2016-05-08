@@ -16,6 +16,7 @@ angular.module('issueTracker.issues.issue.issueController', [])
             $scope.user = identity.getUser;
             $scope.relatedUsers = [];
             $scope.isUserRelated = false;
+            $scope.inputAddComment = {};
 
             $scope.issue = {};
 
@@ -57,7 +58,7 @@ angular.module('issueTracker.issues.issue.issueController', [])
 
             $scope.addComment = function () {
 
-                issues.addComment($scope.issueId, $scope.inputAddComment)
+                issues.addComment($scope.issueId, $scope.inputAddComment.Text)
                     .then(function (data) {
                         $scope.issue.comments = data;
                     });

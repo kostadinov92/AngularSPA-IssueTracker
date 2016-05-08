@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-lg-6">
+        <h3 class="text-center, text-primary">Add new issue to <a href="#/projects/{{project.Id}}">{{project.Name}}</a></h3>
+        <br />
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" for="inputIssueTitle">Title</label>
+                <div class="col-sm-10">
+                    <input ng-model="issueToPost.Title" type="text" class="form-control" id="inputIssueTitle"
+                           placeholder="Issue Title"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <textarea ng-model="issueToPost.Description" class="form-control" rows="3" id="inputDescription"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSearchAssignee" class="col-lg-2 control-label">Search</label>
+                <div class="col-lg-10">
+                    <input ng-keyup="loadUsersByFilter()" ng-model="search.user" class="form-control" id="inputSearchAssignee"
+                           placeholder="Search for issue assignee, then select the user." type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="issueAssignee" class="col-lg-2 control-label">Assignee</label>
+                <div class="col-lg-7">
+                    <select ng-model="issueToPost.AssigneeId" class="form-control" id="issueAssignee">
+                        <option value="" disabled selected hidden>Choose project leader.</option>
+                        <option ng-repeat="user in users" value="{{user.Id}}">{{user.Username}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <button ng-click="loadAllUsers()" type="button" class="btn btn-primary">Load All Users</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" for="issuePriority">Priority</label>
+                <div class="col-sm-10">
+                    <select ng-model="issueToPost.PriorityId" class="form-control" id="issuePriority">
+                        <option value="" disabled selected hidden>Choose priority.</option>
+                        <option ng-repeat="priority in project.Priorities" value="{{priority.Id}}">{{priority.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDueDate" class="col-lg-2 control-label">Due Date</label>
+                <div class="col-lg-10">
+                    <input ng-model="input.DueDate" class="form-control" id="inputDueDate" type="date">
+                </div>
+            </div>
+            <hr />
+            <div class="form-group pull-right">
+                <button ng-click="postNewIssue()" type="button" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-default">Clear</button>
+            </div>
+        </form>
+    </div>
+</div>

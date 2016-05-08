@@ -16,12 +16,13 @@ angular.module('issueTracker', [
     'issueTracker.projects.all.projectsController',
     'issueTracker.projects.project.projectController',
     'issueTracker.issues',
-    'issueTracker.users',
     'issueTracker.issues.issue.issueController',
+    'issueTracker.issues.addIssue.addIssueController',
+    'issueTracker.users',
     'issueTracker.users.authentication',
     'issueTracker.users.identity',
     'issueTracker.users.account',
-    'issueTracker.users.profile.changePasswordCtrl',
+    'issueTracker.users.profile.changePasswordCtrl'
     
 ])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
@@ -56,6 +57,11 @@ angular.module('issueTracker', [
           $routeProvider.when('/projects/:projectId/edit', {
               templateUrl: 'app/projects/project/edit-project.html',
               controller: 'ProjectCtrl'
+          });
+
+          $routeProvider.when('/projects/:projectId/add-issue', {
+              templateUrl: 'app/issues/add-issue/add-issue.html',
+              controller: 'AddIssueCtrl'
           });
 
           $routeProvider.when('/issues/:issueId', {
@@ -95,8 +101,6 @@ angular.module('issueTracker', [
 }])
     .run([
         'Authentication',
-        'Identity',
-        function(authentication, identity) {
+        function(authentication) {
             authentication.refreshCookie();
-            identity.requestUserInfo();
     }]);

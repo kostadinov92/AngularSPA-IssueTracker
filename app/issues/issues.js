@@ -69,13 +69,32 @@ angular.module('issueTracker.issues', [])
             function addComment(id, text) {
                 var defered = $q.defer();
 
-                var url = BASE_URL + '/issues/' + id + '/comments';
-                $http.post(url, {Text: text})
+                var url = BASE_URL + 'issues/' + id + '/comments';
+                $http.post(url, {
+                    Text: text,
+                    headers: {
+                        ContentType: 'application/x-www-form-urlencoded'
+                    }
+                })
                     .then(function (success) {
                         defered.resolve(success.data);
                     }, function (error) {
                         defered.reject(error);
-                        console.log(data);
+                        console.log(error);
+                    });
+
+                return defered.promise;
+            }
+
+            function addIssueToAProject(issue) {
+                var defered = $q.defer();
+
+                var url = BASE_URL + 'issues';
+                $http.post(url, issue)
+                    .then(function (success) {
+                        defered.resolve(success.data);
+                    }, function (error) {
+                        defered.reject(error);
                     });
 
                 return defered.promise;
@@ -86,6 +105,7 @@ angular.module('issueTracker.issues', [])
                 getUserIssues: getUserIssues,
                 getIssuesByProjectId: getIssuesByProjectId,
                 getCommentsByIssueId: getCommentsByIssueId,
+                addIssueToAProject: addIssueToAProject,
                 addComment: addComment
             };
         }

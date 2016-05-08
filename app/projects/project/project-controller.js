@@ -4,11 +4,12 @@ angular.module('issueTracker.projects.project.projectController', [])
     .controller('ProjectCtrl', [
         '$scope',
         '$routeParams',
+        '$window',
         'Identity',
         'Projects',
         'Issues',
         'toastr',
-        function ($scope, $routeParams, identity, projects, issues, toastr) {
+        function ($scope, $routeParams, $window, identity, projects, issues, toastr) {
             var projectId = $routeParams.projectId;
 
             $scope.project = {};
@@ -23,7 +24,7 @@ angular.module('issueTracker.projects.project.projectController', [])
                 projects.editProject(edited)
                     .then(function (response) {
                         toastr.success('The project "' + response.Name +'" was edited successfully.');
-                        console.log(response);
+                        $window.history.back();
                     });
             };
 
