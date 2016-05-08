@@ -3,11 +3,12 @@
 angular.module('issueTracker.users.authentication', [])
     .factory('Authentication', [
         '$http',
+        '$route',
         '$cookies',
         '$q',
         'Identity',
         'BASE_URL',
-        function ($http, $cookies, $q, identity, BASE_URL) {
+        function ($http, $route, $cookies, $q, identity, BASE_URL) {
 
         var AUTHENTICATION_COOKIE_KEY = '-__-Auth-__-';
 
@@ -79,7 +80,10 @@ angular.module('issueTracker.users.authentication', [])
         function refreshCookie() {
             if (isAuthenticated()) {
                 $http.defaults.headers.common.Authorization = $cookies.get(AUTHENTICATION_COOKIE_KEY);
-                identity.requestUserInfo();
+                identity.requestUserInfo()
+                    .then(function (success) {
+                        $route.reload();
+                    });
             }
         }
 
