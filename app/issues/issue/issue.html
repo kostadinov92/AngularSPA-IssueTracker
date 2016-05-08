@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-5">
         <h2>
             <p class="text-primary text-center">{{issue.Title}}</p>
         </h2>
@@ -38,10 +38,16 @@
                 {{issue.Description}}
             </p>
         </div>
+        <hr />
         <p>
             <span class="text-primary"><strong>Status: </strong></span>
             <span class="pull-right text-info">{{issue.Status.Name}}</span>
         </p>
+        <p class="text-center text-primary"><strong>Change status</strong></p>
+        <div ng-if="issue.Assignee.Id === user().Id" class="btn-group btn-group-justified">
+            <a ng-repeat="status in issue.AvailableStatuses" ng-click="changeStatus(status.Id)" href="" class="btn btn-success">{{status.Name}}</a>
+        </div>
+        <hr />
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Labels</h3>

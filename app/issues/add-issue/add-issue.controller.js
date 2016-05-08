@@ -51,7 +51,7 @@ angular.module('issueTracker.issues.addIssue.addIssueController', [])
                 issues.addIssueToAProject($scope.issueToPost)
                     .then(function (data) {
                         console.log(data);
-                        $location.path('#/issues/' + data.Id);
+                        $location.path('issues/' + data.Id);
                     });
 
             };

@@ -39,7 +39,7 @@ angular.module('issueTracker', [
 
 
           $routeProvider.when('/profile/password', {
-              templateUrl: 'app/profile/change-password.html',
+              templateUrl: 'app/users/profile/change-password.html',
               controller: 'ChangePasswordCtrl'
           });
 

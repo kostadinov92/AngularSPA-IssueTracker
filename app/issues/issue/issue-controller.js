@@ -5,12 +5,13 @@
 angular.module('issueTracker.issues.issue.issueController', [])
     .controller('IssueCtrl', [
         '$scope',
+        '$route',
         '$routeParams',
+        '$location',
         'Issues',
         'Projects',
         'Identity',
-        'jQuery',
-        function ($scope, $routeParams, issues, projects, identity, jQuery) {
+        function ($scope, $route, $routeParams, $location, issues, projects, identity) {
 
             $scope.issueId = $routeParams.issueId;
             $scope.user = identity.getUser;
@@ -54,7 +55,12 @@ angular.module('issueTracker.issues.issue.issueController', [])
                         });
                 });
 
-
+                $scope.changeStatus = function (statusId) {
+                    issues.changeIssueStatus($scope.issueId ,statusId)
+                        .then(function (success) {
+                            $route.reload();
+                        });
+                };
 
             $scope.addComment = function () {
 
