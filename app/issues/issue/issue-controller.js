@@ -8,23 +8,71 @@ angular.module('issueTracker.issues.issue.issueController', [])
         '$route',
         '$routeParams',
         '$location',
+        '$window',
         'Issues',
         'Projects',
         'Identity',
-        function ($scope, $route, $routeParams, $location, issues, projects, identity) {
+        'Users',
+        'toastr',
+        function ($scope, $route, $routeParams, $location, $window, issues, projects, identity, users, toastr) {
 
             $scope.issueId = $routeParams.issueId;
             $scope.user = identity.getUser;
             $scope.relatedUsers = [];
             $scope.isUserRelated = false;
             $scope.inputAddComment = {};
+            $scope.search = {user: ''};
 
             $scope.issue = {};
+
+            $scope.loadUsersByFilter = function () {
+                if($scope.search.user.length < 2){
+                    return;
+                }
+                users.getUsersByFilter($scope.search.user)
+                    .then(function (data) {
+                        $scope.users = data;
+                    });
+            };
+
+            $scope.loadAllUsers = function () {
+                users.getAllUsers()
+                    .then(function (data) {
+                        $scope.users = data;
+                    });
+            };
+
+            $scope.editIssue = function () {
+                delete $scope.issue.Id;
+                delete $scope.issue.Author;
+                delete $scope.issue.IssueKey;
+                delete $scope.issue.AvailableStatuses;
+                delete $scope.issue.Project;
+                delete $scope.issue.Status;
+
+                var assigneeId = $scope.issue.Assignee.Id;
+                delete $scope.issue.Assignee;
+                $scope.issue.AssigneeId = assigneeId
+
+                var priorityId = $scope.issue.Priority.Id;
+                delete $scope.issue.Priority;
+                $scope.issue.PriorityId = priorityId;
+
+                issues.editIssue($scope.issueId, $scope.issue)
+                    .then(function (success) {
+                        $window.history.back();
+                        toastr.success($scope.issue.Title + ' was edited successfully.')
+                    });
+            };
 
             issues.getIssueById($scope.issueId)
                 .then(function (data) {
                     $scope.issue = data;
                     console.log(data);
+
+                    $scope.search.user = $scope.issue.Assignee.Username;
+                    $scope.loadUsersByFilter();
+
 
                     issues.getCommentsByIssueId($scope.issueId)
                         .then(function (data) {
@@ -69,5 +117,7 @@ angular.module('issueTracker.issues.issue.issueController', [])
                         $scope.issue.comments = data;
                     });
             };
+
+
         }
     ]);

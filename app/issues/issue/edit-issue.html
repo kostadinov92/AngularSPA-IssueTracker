@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-lg-6">
+        <h3 class="text-center, text-primary">Edit Issue</h3>
+        <br />
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" for="inputIssueTitle">Title</label>
+                <div class="col-sm-10">
+                    <input ng-model="issue.Title" type="text" class="form-control" id="inputIssueTitle"
+                           placeholder="Issue Title"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+                    <textarea ng-model="issue.Description" class="form-control" rows="3" id="inputDescription"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSearchAssignee" class="col-lg-2 control-label">Search</label>
+                <div class="col-lg-10">
+                    <input ng-keyup="loadUsersByFilter()" ng-model="search.user" class="form-control" id="inputSearchAssignee"
+                           placeholder="Search for issue assignee, then select the user." type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="issueAssignee" class="col-lg-2 control-label">Assignee</label>
+                <div class="col-lg-7">
+                    <select ng-model="issue.Assignee.Id" class="form-control" id="issueAssignee">
+                        <option value="" disabled selected hidden>Choose project leader.</option>
+                        <option ng-repeat="user in users" value="{{user.Id}}">{{user.Username}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <button ng-click="loadAllUsers()" type="button" class="btn btn-primary">Load All Users</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" for="issuePriority">Priority</label>
+                <div class="col-sm-10">
+                    <input disabled ng-model="issue.Priority.Name" class="form-control" id="issuePriority" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDueDate" class="col-lg-2 control-label">Due Date</label>
+                <div class="col-lg-10">
+                    <input ng-model="issue.DueDate" class="form-control" id="inputDueDate" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" for="inputLabelSearch">Labels</label>
+                <div class="col-sm-6">
+                    <input ng-keyup="searchLabel($event)" ng-model="search.label" type="search" class="form-control" id="inputLabelSearch"
+                           placeholder="Press Enter to add."/>
+                </div>
+                <div class="col-sm-4">
+                    <p class="text-primary"><strong>Maybe you mean: </strong><span class="label label-primary">{{search.labelSuggestions[0].Name}}</span></p>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Labels</h3>
+                </div>
+                <div class="panel-body">
+                    <span ng-repeat="label in issue.Labels" class="label label-primary">{{label.Name}}</span>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group pull-right">
+                <button ng-click="editIssue()" type="button" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-default">Clear</button>
+            </div>
+        </form>
+    </div>
+</div>

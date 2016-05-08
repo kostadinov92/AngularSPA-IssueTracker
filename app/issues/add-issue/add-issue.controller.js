@@ -12,7 +12,8 @@ angular.module('issueTracker.issues.addIssue.addIssueController', [])
         'Issues',
         'Users',
         'Labels',
-        function ($scope, $routeParams, $location, $window, projects, issues, users, labels) {
+        'toastr',
+        function ($scope, $routeParams, $location, $window, projects, issues, users, labels, toastr) {
             $scope.projectId = $routeParams.projectId;
             $scope.issueToPost = {Labels: []};
             $scope.users = [];
@@ -52,7 +53,7 @@ angular.module('issueTracker.issues.addIssue.addIssueController', [])
                 
                 issues.addIssueToAProject($scope.issueToPost)
                     .then(function (data) {
-                        console.log(data);
+                        toastr.success(data.Title + ' was added successfully.');
                         $location.path('issues/' + data.Id);
                     });
 

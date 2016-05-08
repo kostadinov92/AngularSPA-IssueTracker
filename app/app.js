@@ -75,6 +75,11 @@ angular.module('issueTracker', [
               controller: 'IssueCtrl'
           });
 
+          $routeProvider.when('/issues/:issueId/edit', {
+              templateUrl: 'app/issues/issue/edit-issue.html',
+              controller: 'IssueCtrl'
+          });
+
           $routeProvider.otherwise({redirectTo: '/'});
 
           $httpProvider.interceptors.push([

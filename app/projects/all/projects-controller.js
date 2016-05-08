@@ -4,16 +4,18 @@ angular.module('issueTracker.projects.all.projectsController', [])
     .controller('ProjectsCtrl', [
         '$scope',
         '$rootScope',
+        '$route',
         '$routeParams',
         '$location',
         'Projects',
         'Identity',
         'Users',
-        function ProjectsCtrl($scope, $rootScope, $routeParams, $location,projects, identity, users) {
+        'toastr',
+        function ProjectsCtrl($scope, $rootScope, $route, $routeParams, $location, projects, identity, users, toastr) {
 
             $scope.users = {};
             $scope.projectToPost = {};
-            $scope.search = {};
+            $scope.search = {user: ''};
             $scope.totalPages = function () {
                 return [];
             };
@@ -39,13 +41,14 @@ angular.module('issueTracker.projects.all.projectsController', [])
 
                 projects.addProject($scope.projectToPost)
                     .then(function (success) {
-                        console.log(success);
+                        toastr.success(success.data.Description + ' was created successfully.');
+                        console.log(success.data);
                     });
 
             };
 
             $scope.loadProjects = function(){
-                
+
 
                 if(!$routeParams.page){
                     $routeParams.page = 1;

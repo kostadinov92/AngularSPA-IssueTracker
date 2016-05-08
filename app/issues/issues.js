@@ -115,12 +115,28 @@ angular.module('issueTracker.issues', [])
                 return defered.promise;
             }
 
+            function editIssue(id, issue) {
+                var defered = $q.defer();
+
+                var url = BASE_URL + 'issues/' + id;
+                $http.put(url, issue)
+                    .then(function (success) {
+                        defered.resolve(success.data);
+                    }, function (error) {
+                        defered.reject(error);
+                        console.log(error);
+                    });
+
+                return defered.promise;
+            }
+
             return{
                 getIssueById: getIssueById,
                 getUserIssues: getUserIssues,
                 getIssuesByProjectId: getIssuesByProjectId,
                 getCommentsByIssueId: getCommentsByIssueId,
                 addIssueToAProject: addIssueToAProject,
+                editIssue: editIssue,
                 addComment: addComment,
                 changeIssueStatus: changeIssueStatus
             };
