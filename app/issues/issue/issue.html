@@ -43,7 +43,7 @@
             <span class="text-primary"><strong>Status: </strong></span>
             <span class="pull-right text-info">{{issue.Status.Name}}</span>
         </p>
-        <p class="text-center text-primary"><strong>Change status</strong></p>
+        <p ng-if='issue.Status.Name !== "Closed"' class="text-center text-primary"><strong>Change status</strong></p>
         <div ng-if="issue.Assignee.Id === user().Id" class="btn-group btn-group-justified">
             <a ng-repeat="status in issue.AvailableStatuses" ng-click="changeStatus(status.Id)" href="" class="btn btn-success">{{status.Name}}</a>
         </div>

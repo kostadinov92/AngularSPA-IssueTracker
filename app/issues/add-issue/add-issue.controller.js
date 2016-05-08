@@ -7,14 +7,16 @@ angular.module('issueTracker.issues.addIssue.addIssueController', [])
         '$scope',
         '$routeParams',
         '$location',
+        '$window',
         'Projects',
         'Issues',
         'Users',
-        function ($scope, $routeParams, $location, projects, issues, users) {
+        'Labels',
+        function ($scope, $routeParams, $location, $window, projects, issues, users, labels) {
             $scope.projectId = $routeParams.projectId;
-            $scope.issueToPost = {};
+            $scope.issueToPost = {Labels: []};
             $scope.users = [];
-            $scope.search = {user: ''};
+            $scope.search = {user: '', label: '', labelSuggestions: []};
 
             projects.getProjectById($scope.projectId)
                 .then(function (data) {
@@ -54,6 +56,18 @@ angular.module('issueTracker.issues.addIssue.addIssueController', [])
                         $location.path('issues/' + data.Id);
                     });
 
+            };
+
+            $scope.searchLabel = function (event) {
+                if (event.keyCode === 13){
+                    $scope.issueToPost.Labels.push({Name: $scope.search.label});
+                    $scope.search.label = '';
+                }else {
+                    labels.getLabelsByFilter($scope.search.label)
+                        .then(function (data) {
+                            $scope.search.labelSuggestions = data;
+                        });
+                }
             };
         }
     ]);

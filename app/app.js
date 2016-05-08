@@ -22,7 +22,8 @@ angular.module('issueTracker', [
     'issueTracker.users.authentication',
     'issueTracker.users.identity',
     'issueTracker.users.account',
-    'issueTracker.users.profile.changePasswordCtrl'
+    'issueTracker.users.profile.changePasswordCtrl',
+    'issueTracker.labels'
     
 ])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')

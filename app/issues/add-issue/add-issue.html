@@ -51,6 +51,24 @@
                     <input ng-model="input.DueDate" class="form-control" id="inputDueDate" type="date">
                 </div>
             </div>
+            <div class="form-group">
+                <label  class="col-sm-2 control-label" for="inputLabelSearch">Labels</label>
+                <div class="col-sm-6">
+                    <input ng-keyup="searchLabel($event)" ng-model="search.label" type="search" class="form-control" id="inputLabelSearch"
+                           placeholder="Press Enter to add."/>
+                </div>
+                <div class="col-sm-4">
+                    <p class="text-primary"><strong>Maybe you mean: </strong><span class="label label-primary">{{search.labelSuggestions[0].Name}}</span></p>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Labels</h3>
+                </div>
+                <div class="panel-body">
+                    <span ng-repeat="label in issueToPost.Labels" class="label label-primary">{{label.Name}}</span>
+                </div>
+            </div>
             <hr />
             <div class="form-group pull-right">
                 <button ng-click="postNewIssue()" type="button" class="btn btn-primary">Submit</button>
