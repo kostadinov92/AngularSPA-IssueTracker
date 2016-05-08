@@ -108,6 +108,8 @@ angular.module('issueTracker', [
 
             authentication.refreshCookie();
 
+            $rootScope.pageSize = 25;
+            
             $rootScope.$on('$routeChangeStart', function (event, next) {
 
                 if(!!next.$$route && next.$$route.originalPath !== '/') {

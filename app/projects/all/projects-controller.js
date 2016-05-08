@@ -45,9 +45,7 @@ angular.module('issueTracker.projects.all.projectsController', [])
             };
 
             $scope.loadProjects = function(){
-                if(!$rootScope.pageSize){
-                    $rootScope.pageSize = 25;
-                }
+                
 
                 if(!$routeParams.page){
                     $routeParams.page = 1;
